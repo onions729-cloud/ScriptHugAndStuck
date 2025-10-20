@@ -1,0 +1,15 @@
+ local stuckName = "Youruser"
+local targetName = "Friend'sUser"
+
+game:GetService("RunService").Heartbeat:Connect(function()
+	local stuckPlayer = game.Players:FindFirstChild(stuckName)
+	local targetPlayer = game.Players:FindFirstChild(targetName)
+	if not stuckPlayer or not targetPlayer then return end
+
+	local stuckChar = stuckPlayer.Character
+	local targetChar = targetPlayer.Character
+	if not stuckChar or not targetChar then return end
+
+	local stuckRoot = stuckChar:FindFirstChild("HumanoidRootPart")
+	local targetRoot = targetChar:FindFirstChild("HumanoidRootPart")
+	if not stuckRoot or not targetRoot then return end
