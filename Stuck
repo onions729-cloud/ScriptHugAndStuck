@@ -1,5 +1,5 @@
- local stuckName = "Youruser"
-local targetName = "Friend'sUser"
+ local stuckName = "oeo729" --replace
+local targetName = "Iamacakelove" --replace
 
 game:GetService("RunService").Heartbeat:Connect(function()
 	local stuckPlayer = game.Players:FindFirstChild(stuckName)
@@ -13,3 +13,8 @@ game:GetService("RunService").Heartbeat:Connect(function()
 	local stuckRoot = stuckChar:FindFirstChild("HumanoidRootPart")
 	local targetRoot = targetChar:FindFirstChild("HumanoidRootPart")
 	if not stuckRoot or not targetRoot then return end
+
+
+	local offset = targetRoot.CFrame.LookVector * 1 -- 3 studs in front
+	stuckRoot.CFrame = CFrame.new(targetRoot.Position + offset, targetRoot.Position)
+end)
