@@ -1,5 +1,5 @@
-local stuckName = "oeo729"
-local targetName = "Iamacakelove"
+local stuckName = "oeo729" --replace
+local targetName = "Iamacakelove" --replace
 
 local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
