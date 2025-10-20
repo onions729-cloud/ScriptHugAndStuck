@@ -1,0 +1,55 @@
+local stuckName = "oeo729"
+local targetName = "Iamacakelove"
+
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+local LocalPlayer = Players.LocalPlayer
+
+local HugTool = Instance.new("Tool")
+HugTool.Name = "Hug Tool\nOff"
+HugTool.RequiresHandle = false
+HugTool.ToolTip = "Hug Tool R6"
+HugTool.Parent = LocalPlayer:WaitForChild("Backpack")
+
+local Play_1, Play_2
+
+HugTool.Equipped:Connect(function()
+	HugTool.Name = "Hug Tool\nOn"
+
+	local humanoid = LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("Humanoid")
+	if humanoid then
+		local Anim_1 = Instance.new("Animation")
+		Anim_1.AnimationId = "rbxassetid://283545583"
+		Play_1 = humanoid:LoadAnimation(Anim_1)
+
+		local Anim_2 = Instance.new("Animation")
+		Anim_2.AnimationId = "rbxassetid://225975820"
+		Play_2 = humanoid:LoadAnimation(Anim_2)
+
+		Play_1:Play()
+		Play_2:Play()
+	end
+end)
+
+HugTool.Unequipped:Connect(function()
+	HugTool.Name = "Hug Tool\nOff"
+	if Play_1 then Play_1:Stop() end
+	if Play_2 then Play_2:Stop() end
+end)
+
+RunService.Heartbeat:Connect(function()
+	local stuckPlayer = Players:FindFirstChild(stuckName)
+	local targetPlayer = Players:FindFirstChild(targetName)
+	if not stuckPlayer or not targetPlayer then return end
+
+	local stuckChar = stuckPlayer.Character
+	local targetChar = targetPlayer.Character
+	if not stuckChar or not targetChar then return end
+
+	local stuckRoot = stuckChar:FindFirstChild("HumanoidRootPart")
+	local targetRoot = targetChar:FindFirstChild("HumanoidRootPart")
+	if not stuckRoot or not targetRoot then return end
+
+	local offset = targetRoot.CFrame.LookVector * 1
+	stuckRoot.CFrame = CFrame.new(targetRoot.Position + offset, targetRoot.Position)
+end)
